@@ -16,10 +16,10 @@
 <script src="https://znzsofficial.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://znzsofficial.github.io/media/js/functions.js"></script>
     <meta name="referrer" content="never">
-    <meta name="description" content="require &quot;import&quot;
-import &quot;android.app.&quot;
-import &quot;android.os.&quot;
-import &quot;android.widget.&q..." />
+    <meta name="description" content=" require &quot;import&quot;
+import &quot;android.app.*&quot;
+import &quot;android.os.*&quot;
+import &quot;android.widget..." />
     <meta name="keywords" content="Lua" />
     <script src="https://znzsofficial.github.io/media/js/waterfall.min.js"></script>
     <script src="https://znzsofficial.github.io/media/js/prism.min.js"></script>
@@ -81,7 +81,7 @@ import &quot;android.widget.&q..." />
       <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
         <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
           <div class="search-wrapper section">
-            <form id="gridea-search-form" data-update="1629689534445" action="/search/index.html" class="search-form" _lpchecked="1">
+            <form id="gridea-search-form" data-update="1629810852135" action="/search/index.html" class="search-form" _lpchecked="1">
               <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
               <button type="submit" class="submit" aria-label="Submit">
                 <i class="fa fa-search-line"></i>
@@ -120,48 +120,51 @@ import &quot;android.widget.&q..." />
             <article class="main-article post">
               <section class="post-content">
                 <div class="text">
-                  <p>require &quot;import&quot;<br>
-import &quot;android.app.<em>&quot;<br>
-import &quot;android.os.</em>&quot;<br>
-import &quot;android.widget.<em>&quot;<br>
-import &quot;android.view.</em>&quot;<br>
-activity.setTitle('sqlite数据库操作')<br>
-activity.setTheme(android.R.style.Theme_Holo_Light)<br>
---本篇来自nirenr，用于研究和扩展。<br>
-bj={<br>
-LinearLayout;<br>
-orientation=&quot;vertical&quot;;<br>
-layout_height=&quot;fill&quot;;<br>
-layout_width=&quot;fill&quot;;<br>
-{<br>
-HorizontalScrollView;<br>
-{<br>
-LinearLayout;<br>
-{<br>
-Button;<br>
-text=&quot;创建表&quot;;<br>
-id=&quot;btn1&quot;;<br>
-};<br>
-{<br>
-Button;<br>
-text=&quot;添加列&quot;;<br>
-id=&quot;btn2&quot;;<br>
-};<br>
-{<br>
-Button;<br>
-text=&quot;查询表内所有数据&quot;;<br>
-id=&quot;btn3&quot;;<br>
-};<br>
-};<br>
-};<br>
-{<br>
-TextView;<br>
-layout_width=&quot;fill&quot;;<br>
-text=&quot;hello AndroLua+&quot;;<br>
-};<br>
-};</p>
-<p>activity.setContentView(loadlayout(bj))<br>
---[[</p>
+                  <pre><code> require &quot;import&quot;
+import &quot;android.app.*&quot;
+import &quot;android.os.*&quot;
+import &quot;android.widget.*&quot;
+import &quot;android.view.*&quot;
+activity.setTitle('sqlite数据库操作')
+activity.setTheme(android.R.style.Theme_Holo_Light)
+--本篇来自nirenr，用于研究和扩展。
+bj={
+  LinearLayout;
+  orientation=&quot;vertical&quot;;
+  layout_height=&quot;fill&quot;;
+  layout_width=&quot;fill&quot;;
+  {
+    HorizontalScrollView;
+    {
+      LinearLayout;
+      {
+        Button;
+        text=&quot;创建表&quot;;
+        id=&quot;btn1&quot;;
+      };
+      {
+        Button;
+        text=&quot;添加列&quot;;
+        id=&quot;btn2&quot;;
+      };
+      {
+        Button;
+        text=&quot;查询表内所有数据&quot;;
+        id=&quot;btn3&quot;;
+      };
+    };
+  };
+  {
+    TextView;
+    layout_width=&quot;fill&quot;;
+    text=&quot;hello AndroLua+&quot;;
+  };
+};
+
+
+activity.setContentView(loadlayout(bj))
+</code></pre>
+<p>--[[</p>
 <p>【常用SQL语句】</p>
 <p>1.数据类型：<br>
 整型：int<br>
@@ -214,77 +217,85 @@ select 学号,成绩 from xs_kc，kc<br>
 where xs_kc.课程号=kc.课程号<br>
 add 课程名='计算机基础'</p>
 <p>3.创建存储过程：<br>
-//根据名字查询平均成绩，输入参数，输出参数<br>
-create proc pxs_avgByName(<br>
-@name char(8) ,@avg float output<br>
-)<br>
-as<br>
-set @avg=(select avg(成绩)<br>
-from xs,xs_kc<br>
-where xs.学号=xs_kc.学号<br>
-and xs.姓名=@name)<br>
-go<br>
-//执行存储过程<br>
-declare @ag float<br>
-exec pxs_avgByName '李林',@avg output<br>
-select '平均分' =@ag</p>
+//根据名字查询平均成绩，输入参数，输出参数</p>
+<pre><code>create proc pxs_avgByName(
+	@name char(8) ,@avg float output
+)
+as
+	set @avg=(select avg(成绩) 
+	from xs,xs_kc 
+	where xs.学号=xs_kc.学号 
+	and xs.姓名=@name)
+go
+//执行存储过程
+declare @ag float
+exec pxs_avgByName '李林',@avg output
+select '平均分' =@ag
+</code></pre>
 <p>4.创建触发器：<br>
 //如果在XS表中添加或修改的学生学号不是以“08”开头，<br>
-//则使用RAISERROR语句向客户端显示一条信息“学号必修以08开头”。<br>
-create trigger tri_n<br>
-on xs<br>
-for insert,update<br>
-as<br>
-declare @i char(6)<br>
-select @i=学号 from inserted<br>
-if @i not like '08%'<br>
-begin<br>
-ROLLBACK  TRANSACTION<br>
-RAISERROR ('学号必修以08开头，操作已经撤消！', 16, 10)<br>
-end<br>
-go</p>
-<p>--一一一一一一一一一一一一一一一一一一一一一</p>
-<p>//插入数据<br>
-public void insertData(SQLiteDatabase db,String table,Article article){<br>
-ContentValues values = new ContentValues();<br>
-values.put(&quot;title&quot;,article.getTitle());<br>
-values.put(&quot;author&quot;, article.getAuthor());</p>
-<pre><code>db.insert(table, null, values);
-</code></pre>
-<p>}</p>
-<p>//删除数据<br>
-public void deletData(SQLiteDatabase db,String table,Integer id){<br>
-db.delete(table, &quot;_id=?&quot;, new String[]{id.toString()});<br>
-}</p>
-<p>//根据id修改数据<br>
-public void updataData(SQLiteDatabase db,String table,Integer id,Article article){<br>
-ContentValues values = new ContentValues();<br>
-values.put(&quot;title&quot;,article.getTitle());<br>
-values.put(&quot;author&quot;, article.getAuthor());<br>
-db.update(table, values, &quot;_id=?&quot;, new String[]{id.toString()});<br>
-}</p>
-<p>//根据id查询数据库<br>
-public Article selectData(SQLiteDatabase db,String table,Integer id){<br>
-Cursor cursor = db.query(table,null, &quot;_id=?&quot;, new String[]{id.toString()}, null, null, null);<br>
-if(cursor.moveToFirst()){<br>
-String title = cursor.getString(cursor.getColumnIndex(&quot;title&quot;));<br>
-String author = cursor.getString(cursor.getColumnIndex(&quot;author&quot;));<br>
-return new Article(title,author);<br>
-}<br>
-return null;<br>
-}</p>
-<p>//查询数据库所有数据<br>
-public List<Article> selectDatas(SQLiteDatabase db,String table){<br>
-List<Article> articles = new ArrayList<Article>();<br>
-Cursor cursor = db.query(table,null, null, null, null, null, null);<br>
-while(cursor.moveToNext()){<br>
-int id = cursor.getInt(cursor.getColumnIndex(&quot;_id&quot;));<br>
-String title = cursor.getString(cursor.getColumnIndex(&quot;title&quot;));</p>
-<pre><code>	articles.add(new Article(id,title));
+//则使用RAISERROR语句向客户端显示一条信息“学号必修以08开头”。</p>
+<pre><code>create trigger tri_n
+on xs
+for insert,update
+as 
+	declare @i char(6)
+	select @i=学号 from inserted
+	if @i not like '08%'
+	begin
+		ROLLBACK  TRANSACTION 
+		RAISERROR ('学号必修以08开头，操作已经撤消！', 16, 10)
+	end
+go
+
+--一一一一一一一一一一一一一一一一一一一一一
+
+//插入数据
+public void insertData(SQLiteDatabase db,String table,Article article){
+	ContentValues values = new ContentValues();
+	values.put(&quot;title&quot;,article.getTitle());
+	values.put(&quot;author&quot;, article.getAuthor());
+
+	db.insert(table, null, values);
 }
-return articles;
+
+//删除数据
+public void deletData(SQLiteDatabase db,String table,Integer id){
+	db.delete(table, &quot;_id=?&quot;, new String[]{id.toString()});
+}
+
+//根据id修改数据
+public void updataData(SQLiteDatabase db,String table,Integer id,Article article){
+	ContentValues values = new ContentValues();
+	values.put(&quot;title&quot;,article.getTitle());
+	values.put(&quot;author&quot;, article.getAuthor());
+	db.update(table, values, &quot;_id=?&quot;, new String[]{id.toString()});
+}
+
+//根据id查询数据库
+public Article selectData(SQLiteDatabase db,String table,Integer id){
+	Cursor cursor = db.query(table,null, &quot;_id=?&quot;, new String[]{id.toString()}, null, null, null);
+	if(cursor.moveToFirst()){
+		String title = cursor.getString(cursor.getColumnIndex(&quot;title&quot;));
+		String author = cursor.getString(cursor.getColumnIndex(&quot;author&quot;));
+		return new Article(title,author);
+	}
+	return null;
+}
+
+//查询数据库所有数据
+public List&lt;Article&gt; selectDatas(SQLiteDatabase db,String table){
+	List&lt;Article&gt; articles = new ArrayList&lt;Article&gt;();
+	Cursor cursor = db.query(table,null, null, null, null, null, null);
+	while(cursor.moveToNext()){
+		int id = cursor.getInt(cursor.getColumnIndex(&quot;_id&quot;));
+		String title = cursor.getString(cursor.getColumnIndex(&quot;title&quot;));
+         
+		articles.add(new Article(id,title));
+	}
+	return articles;
+}
 </code></pre>
-<p>}</p>
 <p>]]</p>
 <p>--导入包<br>
 import &quot;android.database.sqlite.*&quot;</p>
@@ -412,6 +423,21 @@ end</p>
                   
                   
                   <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://znzsofficial.github.io/vJZyekv4K/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2021-08-24">2021-08-24</time>
+                      <h4 class="title usmall">
+                        <a href="https://znzsofficial.github.io/vJZyekv4K/">Lua-String基础论述</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
                     <a href="https://znzsofficial.github.io/honkai/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://z3.ax1x.com/2021/08/11/fN8YSP.jpg');"></span>
                     </a>
@@ -426,7 +452,7 @@ end</p>
                   
                   
                   
-                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
                     <a href="https://znzsofficial.github.io/honkai3-jianzhang/" class="thumb hover-effect">
                       <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('/media/images/gridea.jpg');"></span>
                     </a>
@@ -440,19 +466,6 @@ end</p>
                   </article>
                   
                   
-                  
-                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
-                    <a href="https://znzsofficial.github.io/Hua/" class="thumb hover-effect">
-                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://z3.ax1x.com/2021/08/11/fNtrHU.jpg');"></span>
-                    </a>
-                    <div class="info gradient-effect">
-                      <time datetime="2021-07-23">2021-07-23</time>
-                      <h4 class="title usmall">
-                        <a href="https://znzsofficial.github.io/Hua/">华 Hua</a>
-                      </h4>
-                    </div>
-                    <div class="clear"></div>
-                  </article>
                   
                   
                   
@@ -561,7 +574,7 @@ end</p>
           <a href="https://znzsofficial.github.io"><img src="/media/images/gridea.png" alt=""></a>
         </div>
         <p class="published border-effect">
-          ©2019 共 24 篇文章
+          ©2019 共 25 篇文章
           <br/>
           Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
         </p>

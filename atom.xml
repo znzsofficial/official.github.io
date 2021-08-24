@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://znzsofficial.github.io</id>
     <title>智商封印Official™</title>
-    <updated>2021-08-23T03:32:18.875Z</updated>
+    <updated>2021-08-24T13:14:24.191Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://znzsofficial.github.io"/>
     <link rel="self" href="https://znzsofficial.github.io/atom.xml"/>
@@ -11,6 +11,153 @@
     <logo>https://znzsofficial.github.io/images/avatar.png</logo>
     <icon>https://znzsofficial.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 智商封印Official™</rights>
+    <entry>
+        <title type="html"><![CDATA[Lua-String基础论述]]></title>
+        <id>https://znzsofficial.github.io/vJZyekv4K/</id>
+        <link href="https://znzsofficial.github.io/vJZyekv4K/">
+        </link>
+        <updated>2021-08-24T13:00:52.000Z</updated>
+        <content type="html"><![CDATA[<p>爬虫，这是一个大学问，厉害的爬虫可以用同一个网站的相同数据，<br>
+做出更突出的效果，可以将杂乱无章的数据，处理成系统的，分类好的数据来进行复用。<br>
+当然，这些都是厉害的，工程量十分大的，而我们只需要简单的处理页面数据就可以了。<br>
+首先熟悉下Lua的字符串操作<br>
+字符串由一对双引号或单引号来表示。</p>
+<p>string1 = &quot;this is string1&quot;<br>
+string2 = 'this is string2'</p>
+<p>在对一个数字字符串上进行算术操作时，Lua 会尝试将这个数字字符串转成一个数字，字符串连接使用的是 ..如：</p>
+<p>print(&quot;a&quot; .. 'b')<br>
+--输出(ab)<br>
+print(157 .. 428)<br>
+--输出(157428)</p>
+<p>使用 # 来计算字符串的长度，放在字符串前面，如下实例：</p>
+<p>len = &quot;www.androlua.com&quot;<br>
+print(#len)<br>
+--输出(16)</p>
+<p>字符串的截取操作：<br>
+strings=&quot;左中右&quot;</p>
+<p>--取字符串左边<br>
+左=strings:match(&quot;(.+)中&quot;)</p>
+<p>--取字符串中间<br>
+中=strings:match(&quot;左(.-)右&quot;)</p>
+<p>--取字符串右边<br>
+右=strings:match(&quot;中(.+)&quot;)</p>
+<p>--替换<br>
+string.gsub(原字符串,替换的字符串,替换成的字符串)</p>
+<p>--匹配子串位置<br>
+起始位置,结束位置=string.find(字符串,子串)</p>
+<p>--按位置捕获字符串<br>
+string.sub(字符串,子串起始位置,子串结束位置)</p>
+<p>需要一提得是，Lua中使用\来进行转义，例如：<br>
+\n 换行(LF) ，将当前位置移到下一行开头<br>
+\r 回车(CR) ，将当前位置移到本行开头<br>
+\t 水平制表(HT) （跳到下一个TAB位置）<br>
+\ 代表一个反斜线字符<br>
+' 代表一个单引号（撇号）字符<br>
+&quot; 代表一个双引号字符<br>
+\0 空字符(NULL)</p>
+<p>Lua中字符串操作api：<br>
+string.upper(argument) 字符串全部转为大写字母。<br>
+string.lower(argument) 字符串全部转为小写字母。<br>
+string.gsub(mainString,findString,replaceString,num) 在字符串中替换,mainString为要替换的字符串， findString 为被替换的字符，replaceString 要替换的字符，num 替换次数（可以忽略，则全部替换）<br>
+string.find (str, substr, [init, [end]]) 在一个指定的目标字符串中搜索指定的内容(第三个参数为索引),返回其具体位置。不存在则返回 nil。<br>
+string.reverse(arg) 字符串反转<br>
+string.format(...) 返回一个类似printf的格式化字符串<br>
+string.char(arg) 和 string.byte(arg[,int]) char 将整型数字转成字符并连接， byte 转换字符为整数值(可以指定某个字符，默认第一个字符)。<br>
+string.len(arg) 计算字符串长度。<br>
+string.rep(string, n) 返回字符串string的n个拷贝<br>
+.. 链接两个字符串<br>
+string.gmatch(str, pattern) 回一个迭代器函数，每一次调用这个函数，返回一个在字符串 str 找到的下一个符合 pattern 描述的子串。如果参数 pattern 描述的字符串没有找到，迭代函数返回nil。<br>
+string.match(str, pattern, init) string.match()只寻找源字串str中的第一个配对. 参数init可选, 指定搜寻过程的起点, 默认为1。<br>
+在成功配对时, 函数将返回配对表达式中的所有捕获结果; 如果没有设置捕获标记, 则返回整个配对字符串. 当没有成功的配对时, 返回nil。</p>
+<p>其中string.format()有以下转义码：</p>
+<pre><code>%c - 接受一个数字, 并将其转化为ASCII码表中对应的字符
+%d, %i - 接受一个数字并将其转化为有符号的整数格式
+%o - 接受一个数字并将其转化为八进制数格式
+%u - 接受一个数字并将其转化为无符号整数格式
+%x - 接受一个数字并将其转化为十六进制数格式, 使用小写字母
+%X - 接受一个数字并将其转化为十六进制数格式, 使用大写字母
+%e - 接受一个数字并将其转化为科学记数法格式, 使用小写字母e
+%E - 接受一个数字并将其转化为科学记数法格式, 使用大写字母E
+%f - 接受一个数字并将其转化为浮点数格式
+%g(%G) - 接受一个数字并将其转化为%e(%E, 对应%G)及%f中较短的一种格式
+%q - 接受一个字符串并将其转化为可安全被Lua编译器读入的格式
+%s - 接受一个字符串并按照给定的参数格式化该字符串
+</code></pre>
+<p>Lua的匹配模式：<br>
+.(点): 与任何字符配对<br>
+%a: 与任何字母配对<br>
+%c: 与任何控制符配对(例如\n)<br>
+%d: 与任何数字配对<br>
+%l: 与任何小写字母配对<br>
+%p: 与任何标点(punctuation)配对<br>
+%s: 与空白字符配对<br>
+%u: 与任何大写字母配对<br>
+%w: 与任何字母/数字配对<br>
+%x: 与任何十六进制数配对<br>
+%z: 与任何代表0的字符配对<br>
+%x(此处x是非字母非数字字符): 与字符x配对. 主要用来处理表达式中有功能的字符(^$()%.[]*+-?)的配对问题, 例如%%与%配对</p>
+<pre><code>[数个字符类]: 与任何[]中包含的字符类配对. 例如[%w_]与任何字母/数字, 或下划线符号(_)配对
+[^数个字符类]: 与任何不包含在[]中的字符类配对. 例如[^%s]与任何非空白字符配对
+单个字符类匹配该类别中任意单个字符；
+单个字符类跟一个 '*'， 将匹配零或多个该类的字符。 这个条目总是匹配尽可能长的串；
+单个字符类跟一个 '+'， 将匹配一或更多个该类的字符。 这个条目总是匹配尽可能长的串；
+单个字符类跟一个 '-'， 将匹配零或更多个该类的字符。 和 '*' 不同， 这个条目总是匹配尽可能短的串；
+单个字符类跟一个 '?'， 将匹配零或一个该类的字符。 只要有可能，它会匹配一个；
+%n， 这里的 n 可以从 1 到 9； 这个条目匹配一个等于 n 号捕获物（后面有描述）的子串。
+%bxy， 这里的 x 和 y 是两个明确的字符； 这个条目匹配以 x 开始 y 结束， 且其中 x 和 y 保持 平衡 的字符串。 意思是，如果从左到右读这个字符串，对每次读到一个 x 就 +1 ，读到一个 y 就 -1， 最终结束处的那个 y 是第一个记数到 0 的 y。 举个例子，条目 %b() 可以匹配到括号平衡的表达式。
+%f[set]， 指 边境模式； 这个条目会匹配到一个位于 set 内某个字符之前的一个空串， 且这个位置的前一个字符不属于 set 。 集合 set 的含义如前面所述。 匹配出的那个空串之开始和结束点的计算就看成该处有个字符 '\0' 一样。
+</code></pre>
+<p>常用正则(Lua中需要将\换成%)：</p>
+<pre><code>非负整数：^\d+$
+正整数：^[0-9]*[1-9][0-9]*$
+非正整数：^((-\d+)|(0+))$
+负整数：^-[0-9]*[1-9][0-9]*$
+整数：^-?\d+$
+非负浮点数：^\d+(\.\d+)?$
+正浮点数 : ^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)$
+非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$
+负浮点数：^(-((正浮点数正则式)))$
+英文字符串：^[A-Za-z]+$
+英文大写串：^[A-Z]+$
+英文小写串：^[a-z]+$
+英文字符数字串：^[A-Za-z0-9]+$
+英数字加下划线串：^\w+$
+E-mail地址：^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$
+URL：^[a-zA-Z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\s*)?$ 
+或：^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&amp;_~`@[\]\':+!]*([^&lt;&gt;\&quot;\&quot;])*$
+邮政编码：^[1-9]\d{5}$
+中文：^[\u0391-\uFFE5]+$
+电话号码：^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$
+手机号码：^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$
+双字节字符(包括汉字在内)：^\x00-\xff
+匹配首尾空格：(^\s*)|(\s*$)（像vbscript那样的trim函数）
+匹配HTML标记：&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;
+匹配空行：\n[\s| ]*\r
+提取信息中的网络链接：(h|H)(r|R)(e|E)(f|F) *= *('|&quot;)?(\w|\\|\/|\.)+('|&quot;| *|&gt;)?
+提取信息中的邮件地址：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
+提取信息中的图片链接：(s|S)(r|R)(c|C) *= *('|&quot;)?(\w|\\|\/|\.)+('|&quot;| *|&gt;)?
+提取信息中的IP地址：(\d+)\.(\d+)\.(\d+)\.(\d+)
+提取信息中的中国手机号码：(86)*0*13\d{9}
+提取信息中的中国固定电话号码：(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}
+提取信息中的中国电话号码（包括移动和固定电话）：(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}
+提取信息中的中国邮政编码：[1-9]{1}(\d+){5}
+提取信息中的浮点数（即小数）：(-?\d*)\.?\d+
+提取信息中的任何数字 ：(-?\d*)(\.\d+)? 
+IP：(\d+)\.(\d+)\.(\d+)\.(\d+)
+电话区号：/^0\d{2,3}$/
+腾讯QQ号：^[1-9]*[1-9][0-9]*$
+帐号(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+中文、英文、数字及下划线：^[\u4e00-\u9fa5_a-zA-Z0-9]+$
+匹配中文字符的正则表达式： [\u4e00-\u9fa5]
+匹配双字节字符(包括汉字在内)：[^\x00-\xff]
+匹配空行的正则表达式：\n[\s| ]*\r
+匹配HTML标记的正则表达式：/&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;/
+sql语句：^(select|drop|delete|create|update|insert).*$
+匹配首尾空格的正则表达式：(^\s*)|(\s*$)
+匹配Email地址的正则表达式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Honkai impact]]></title>
         <id>https://znzsofficial.github.io/honkai/</id>
@@ -141,7 +288,7 @@ Moon halo : Brighter than tomorrow or yesterday<br>
         <updated>2021-08-07T09:05:07.000Z</updated>
         <content type="html"><![CDATA[<p>个人感觉崩坏三里量子之海和虚数之树这二元对立的神明的世界观做的很是出彩，虚数与实数的对立，树上的叶子被海淹没变成世界泡，海中的能量被书吸收产生量子造物。成功的对崩坏能有了一个颇具宗教色彩的合理解释，还有设定中虚数之树为了能对抗量子之海也在培养自己的树叶（平行世界），用的就是崩坏能，目的是为了考验而不是单纯的破坏，类似社会达尔文主义。既然是考验，不是破坏那肯定有破局之法，而破局之法就是崩坏能这种虚数能量本身。这样对于前文明mei博士的神之键计划和她最终的失败也有一个较好的解释了。那就是她在极大程度上利用了崩坏能（融合战士，神之键），但还没用透，所以失败了，现文明有了前文明的前车之鉴，在崩坏能的利用率上更深了，对标融合战士的女武神，利用崩坏能驱动机械的泰坦天父一系（不过挺失败的利用率才30%多），以及凯文口中的羽化，即奥托口中以人类之心驱动的律者权能——人类律者。从瓦尔特乔伊斯，瓦尔特杨到布洛妮娅，芽衣，琪亚娜（空炎形态）以及黑符都可见一斑。甚至感觉崩坏神有意无意把事件往这方面引导，围堵则退，疏导则通。奥托将西琳和琪亚娜结合克隆，造出人类躯体内的律者意志；识律在符华躯体重生，被自身意志影响而变化，崩坏神就在耳边蛊惑了几句而且还没有大用；理律就更不用说了，人类意志战胜了神的声音，个人感觉更像是神的默许。<br>
 种种来看，现文明这场考试，已经答了一半了，成败看未来吧。<br>
-崩坏能应该就是虚数之树从量子之海里吸收的“营养”，在熵差大的地方由虚数空间流入现世，文明能完全利用崩坏能就可以逆转宇宙熵增，让世界不会热寂，同时因为崩坏能有自发聚集的特性，只要保证全世界的崩坏能浓度低于一定水准就可以防止律者出现。只有遍地月光王座才是真正的救世之道</p>
+崩坏能（崩坏能的实质是虚数内能，）应该就是虚数之树从量子之海里吸收的“营养”，在熵差大的地方由虚数空间流入现世，文明能完全利用崩坏能就可以逆转宇宙熵增，让世界不会热寂，同时因为崩坏能有自发聚集的特性，只要保证全世界的崩坏能浓度低于一定水准就可以防止律者出现。只有遍地月光王座才是真正的救世之道</p>
 <p>去翻翻云天以前的活动剧情18年冬活圣诞狂想曲和评论吧，那里说的很清楚了因为在量子之海找解决崩坏的方法，中途因为传送故障变成了很多分身，现在是去各个世界泡找分身[脱单doge]</p>
 <p>你云吗？最开始是归零纪元（貌似还有更早）mei和琪亚娜cp，凯文是逐火之蛾的，mei超电社的。归零不知道要比崩三凯文那边发达多少，兵神系统，圣痕终端，神械，弑神装甲（这个弑神装甲不是月轮那些，是真正的弑神，对标终焉和迦娜）最后归零是被迦娜毁灭的，在此之前已经杀了52个律者，并且归零时期的律者比新生，追溯篇都强。迦娜灭世才来到了追溯篇，关融合战士p事。融合战士是崩三的，崩二崩三不是同一个世界线，没有树海体系。<br>
 迦娜灭世可比终焉早多了，迦娜可不是那些融合战士比的，没崩坏能虚弱时期，还只是分身，在经过反弹后的普通平a就击碎了月球。</p>
@@ -245,13 +392,14 @@ https://adodoz.cn/download.php</p>
         <link href="https://znzsofficial.github.io/DOAG1tk5b/">
         </link>
         <updated>2021-04-16T12:54:26.000Z</updated>
-        <summary type="html"><![CDATA[<p>普通方法<br>
-function exec(cmd)<br>
-local p=io.popen(string.format('%s',cmd))<br>
-local s=p:read(&quot;*a&quot;)<br>
-p:close()<br>
-return s<br>
-end</p>
+        <summary type="html"><![CDATA[<p>普通方法</p>
+<pre><code>function exec(cmd)
+local p=io.popen(string.format('%s',cmd))
+local s=p:read(&quot;*a&quot;)
+p:close()
+return s
+end
+</code></pre>
 <p>print(exec(&quot;echo  ....&quot;))</p>
 <p>部分常用命令:<br>
 --删除文件或文件夹<br>
@@ -271,13 +419,14 @@ reboot -p</p>
 <p>--重启至recovery<br>
 reboot recovery</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>普通方法<br>
-function exec(cmd)<br>
-local p=io.popen(string.format('%s',cmd))<br>
-local s=p:read(&quot;*a&quot;)<br>
-p:close()<br>
-return s<br>
-end</p>
+        <content type="html"><![CDATA[<p>普通方法</p>
+<pre><code>function exec(cmd)
+local p=io.popen(string.format('%s',cmd))
+local s=p:read(&quot;*a&quot;)
+p:close()
+return s
+end
+</code></pre>
 <p>print(exec(&quot;echo  ....&quot;))</p>
 <p>部分常用命令:<br>
 --删除文件或文件夹<br>
@@ -298,20 +447,21 @@ reboot -p</p>
 reboot recovery</p>
 <!-- more -->
 <p>Root方法</p>
-<p>function exec(cmd,sh,su)<br>
-cmd=tostring(cmd)<br>
-if sh == true then<br>
-cmd=io.open(cmd):read(&quot;*a&quot;)<br>
-end<br>
-if su == 0 then<br>
-p=io.popen(string.format('%s',cmd))<br>
-else<br>
-p=io.popen(string.format('%s',&quot;su -c &quot;..cmd))<br>
-end<br>
-local s=p:read(&quot;*a&quot;)<br>
-p:close()<br>
-return s<br>
-end</p>
+<pre><code>function exec(cmd,sh,su)
+  cmd=tostring(cmd)
+  if sh == true then
+    cmd=io.open(cmd):read(&quot;*a&quot;)
+  end
+  if su == 0 then
+    p=io.popen(string.format('%s',cmd))
+   else
+    p=io.popen(string.format('%s',&quot;su -c &quot;..cmd))
+  end
+  local s=p:read(&quot;*a&quot;)
+  p:close()
+  return s
+end
+</code></pre>
 <p>--exec(&quot;路径或者命令&quot;,true,0)<br>
 --传入第一个变量是sh脚本路径或者shell命令<br>
 --如果第一个变量是sh脚本路径，那么第二个传入true，如果不是，则传入false<br>
@@ -547,29 +697,6 @@ vibrator.vibrate( long{100,800} ,-1)<br>
 --{等待时间,振动时间,等待时间,振动时间,…}<br>
 --{0,1000,500,1000,500,1000}<br>
 --别忘了申明权限</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Lua控件背景渐变]]></title>
-        <id>https://znzsofficial.github.io/RODvESYCy/</id>
-        <link href="https://znzsofficial.github.io/RODvESYCy/">
-        </link>
-        <updated>2021-04-16T12:40:58.000Z</updated>
-        <content type="html"><![CDATA[<p>view=控件id<br>
-color1 = 0xffFF8080;<br>
-color2 = 0xff8080FF;<br>
-color3 = 0xff80ffff;<br>
-color4 = 0xff80ff80;<br>
-import &quot;android.animation.ObjectAnimator&quot;<br>
-import &quot;android.animation.ArgbEvaluator&quot;<br>
-import &quot;android.animation.ValueAnimator&quot;<br>
-import &quot;android.graphics.Color&quot;<br>
-colorAnim = ObjectAnimator.ofInt(view,&quot;backgroundColor&quot;,{color1, color2, color3,color4})<br>
-colorAnim.setDuration(3000)<br>
-colorAnim.setEvaluator(ArgbEvaluator())<br>
-colorAnim.setRepeatCount(ValueAnimator.INFINITE)<br>
-colorAnim.setRepeatMode(ValueAnimator.REVERSE)<br>
-colorAnim.start()</p>
 ]]></content>
     </entry>
 </feed>
